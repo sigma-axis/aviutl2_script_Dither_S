@@ -61,7 +61,7 @@
 You may be able to find a language translation file for this script from [this repository](https://github.com/sigma-axis/aviutl2_translations_sigma-axis). 
 Translation files enable names and parameters of the scripts / filters to be displayed in other languages.
 
-However, usage documentations for this script in languages other than Japanese are not available now.
+However, usage documentation for this script in languages other than Japanese is not available now.
 
 ##  ディザ減色σ
 
