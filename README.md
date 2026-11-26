@@ -58,10 +58,10 @@
 
 ### For non-Japanese speaking users
 
-You may be able to find language translation file for this script from [this repository](https://github.com/sigma-axis/aviutl2_translations_sigma-axis). 
+You may be able to find a language translation file for this script from [this repository](https://github.com/sigma-axis/aviutl2_translations_sigma-axis). 
 Translation files enable names and parameters of the scripts / filters to be displayed in other languages.
 
-Although, usage documentations for this script in languages other than Japanese are not available now.
+However, usage documentations for this script in languages other than Japanese are not available now.
 
 ##  ディザ減色σ
 
@@ -84,7 +84,7 @@ Although, usage documentations for this script in languages other than Japanese 
 | `CMY` | `RGB` の白色からの補数で計算． |
 | `CMY Linear` | `RGB Linear` の白色からの補数で計算． |
 
-- `RGB` と `CMY` の違いは，原色計算の原点が黒から白に変わるほか，[ディザリングのパターン](#パターン)も反転するので，`Halftone` など一部は見え方が異なります．
+- `RGB` と `CMY` の違いは，減色計算の原点が黒から白に変わるほか，[ディザリングのパターン](#パターン)も反転するので，`Halftone` など一部は見え方が異なります．
 
 初期値は `RGB Linear`.
 
@@ -293,7 +293,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
   ぼかし幅をピクセル単位で指定します．
 
-  最小値は 0 最大値は 2000, 初期値は 40.
+  最小値は 0, 最大値は 2000, 初期値は 40.
 
 - **縦横比**
 
@@ -479,7 +479,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
 ## `PI` について
 
-各種スクリプトにある設定項目で，パラメタインジェクション (parameter injection) です．初期値は空欄. テーブル型の中身として解釈され，各種パラメタの代替値として使用されます．また，任意のスクリプトコードを実行する記述領域にもなります．
+各種スクリプトにある設定項目で，パラメタインジェクション (parameter injection) です．初期値は空欄．テーブル型の中身として解釈され，各種パラメタの代替値として使用されます．また，任意のスクリプトコードを実行する記述領域にもなります．
 
 テーブルを指定するテキストボックスには，冒頭末尾の波括弧 (`{}`) を省略して記述してください．
 
