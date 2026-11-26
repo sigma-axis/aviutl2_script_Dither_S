@@ -1,0 +1,121 @@
+float checker(uint2 p)
+{
+	float b = 0;
+	if ((dot(p, 1) & 1) != 0) { p += uint2(127, 128); b = 1; }
+	p = firstbitlow(256 | p);
+	uint v = 2 * (8 - min(p.x, p.y));
+	if (p.x == p.y && v > 0) v -= 1;
+	static const float V = 0.4 / (1 << 15);
+	return abs(V * (1 << v) - b);
+}
+uint bayer_88(uint2 p)
+{
+	p.y ^= p.x;
+	uint v = dot(p & 0xff, uint2(1 << 8, 1));
+	v = (v & 0x0ff0) | ((v & 0xf000) >>12) | ((v & 0x000f) <<12);
+	v = (v & 0x3c3c) | ((v & 0xc0c0) >> 6) | ((v & 0x0303) << 6);
+	v = (v & 0x6666) | ((v & 0x8888) >> 3) | ((v & 0x1111) << 3);
+	return v;
+}
+// Interleaved Gradient Noise by Jorge Jimenez
+// https://www.iryoku.com/next-generation-post-processing-in-call-of-duty-advanced-warfare
+float ign(float2 v)
+{
+    float3 magic = float3(0.06711056, 0.00583715, 52.9829189);
+    return frac(magic.z * frac(dot(v, magic.xy)));
+}
+float halftone(float2 p)
+{
+	static const float pi = 4 * atan(1), a = pi / 4;
+	const float2 u = 2 * frac(p / 4 - 0.5) - 1;
+	const float R = dot(u, u);
+	if (R < 1) return a * R;
+	else return 1 - (1 - a) * (2 - R) * (2 - R);
+}
+float halftone_honeycomb(float2 p)
+{
+	static const float pi = 4 * atan(1), a = pi / (2 * sqrt(3));
+	static const float2x2
+		mat1 = float2x2(1, -1 / sqrt(3), 0, 2 / sqrt(3)),
+		mat2 = 2 * float2x2(1, 0.5, 0, sqrt(3) / 2);
+	float2 u = mul(mat1, p);
+	u = frac(u / 4);
+	if (dot(u, 1) > 1) u = 1 - u;
+	if (dot(u, float2(2, 1)) > 1) u.x = 1 - dot(u, 1);
+	if (dot(u, float2(1, 2)) > 1) u.y = 1 - dot(u, 1);
+	u = mul(mat2, u);
+	const float R = dot(u, u);
+	if (R < 1) return a * R;
+	else return 1 - (1 - a) * (4 - 3 * R) * (4 - 3 * R);
+}
+float halftone_square(float2 p)
+{
+	static const float a = 0.5;
+	const float2 u = abs(2 * frac(p / 4 - 0.5) - 1);
+	const float R = dot(u, 1);
+	if (R < 1) return a * R * R;
+	else return 1 - (1 - a) * (2 - R) * (2 - R);
+}
+float stripe(float2 p)
+{
+	return abs(2 * frac(p.y / 2 - 0.5) - 1);
+}
+float perlin(float2 p, uint2 seed)
+{
+	static const float tau = 8 * atan(1), sqrt2 = sqrt(2);
+	const float2 P = floor(p / 2),
+		d = p / 2 - P, t = d * d * (3 - 2 * d);
+
+	const float
+		a00 = tau * ibuki(float4(P + (float2(0, 0) + (1 << 16)), seed)),
+		a10 = tau * ibuki(float4(P + (float2(1, 0) + (1 << 16)), seed)),
+		a01 = tau * ibuki(float4(P + (float2(0, 1) + (1 << 16)), seed)),
+		a11 = tau * ibuki(float4(P + (float2(1, 1) + (1 << 16)), seed));
+
+	float2 g00, g10, g01, g11;
+	sincos(a00, g00.y, g00.x);
+	sincos(a10, g10.y, g10.x);
+	sincos(a01, g01.y, g01.x);
+	sincos(a11, g11.y, g11.x);
+
+	const float2 nx = lerp(
+		float2(dot(g00, d - float2(0, 0)), dot(g01, d - float2(0, 1))),
+		float2(dot(g10, d - float2(1, 0)), dot(g11, d - float2(1, 1))),
+		t.x);
+	const float n = lerp(nx.x, nx.y, t.y);
+
+	float T = n / sqrt2 + 0.5, S = 1 - T;
+	T = T * T * T * T * T * (1 + 5 * S * (1 + 3 * S + 7 * S * S + 14 * S * S * S));
+	return T;
+}
+float dither_func(float2 pos, uint2 seed, uint pattern)
+{
+	switch (pattern) {
+	default: return 0.5;
+	case 1: // checker
+		return checker(uint2(pos + (1 << 16)));
+	case 2: // bayer 2x2
+		return ((bayer_88(uint2(pos + (1 << 16))) & 0xc000) + 0x2000) / float(1 << 16);
+	case 3: // bayer 4x4
+		return ((bayer_88(uint2(pos + (1 << 16))) & 0xf000) + 0x0800) / float(1 << 16);
+	case 4: // bayer 256x256
+		return (bayer_88(uint2(pos + (1 << 16))) + 0.5) / float(1 << 16);
+	case 5: { // Interleaved Gradient Noise
+		uint2 s = uint2(110017, 90001) * seed;
+		s ^= s.yx >> 14; s &= 0x3fff;
+		return ign(floor(pos) + ((1 << 16) + s));
+	}
+	case 6: // white noise
+		return ibuki(float4(pos + (1 << 16), seed));
+	case 7: // perlin
+		return perlin(pos, seed);
+	case 8: // halftone
+		return halftone(pos);
+	case 9: // halftone honeycomb
+		return halftone_honeycomb(pos);
+	case 10: // halftone square
+		return halftone_square(pos);
+	case 11: // stripe
+		return stripe(pos);
+	}
+}

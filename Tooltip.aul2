@@ -1,0 +1,13 @@
+; Tooltip definitions
+;===============================================================
+; Target: Dither_S (https://github.com/sigma-axis/aviutl2_script_Dither_S)
+; Target Version: ${ver}
+; Language: Default
+
+[Language]
+Information=Default tooltips for Dither_S ${ver} (日本語)
+
+;===============================================================
+
+[Tips.ディザポリトーンσ@Dither_S]
+暗い色=元画像の輝度 0% (黒) に対応する色
