@@ -20,8 +20,11 @@
   1.  [ディザ斜めワイプσ](#ディザ斜めワイプσ)
   1.  [ディザシーンチェンジσ](#ディザシーンチェンジσ)
 
+![ディザ減色σの適用例](https://github.com/user-attachments/assets/4ba34576-14e0-45a8-a468-28d75d38a4f7)
 
-TODO: images.
+![ディザポリトーンσの適用例](https://github.com/user-attachments/assets/58a6e431-fe6d-49b3-9c62-242ce8168a15)
+
+![ディザ斜めクリッピングσの適用例](https://github.com/user-attachments/assets/242c7484-ba94-4750-8346-55fa7395f16f)
 
 - <details>
   <summary>元画像出典 (クリックで表示):</summary>
@@ -64,7 +67,7 @@ Although, usage documentations for this script in languages other than Japanese 
 
 選んだディザリングのパターンで，画像の色成分を階段状にして減色します．レトロゲームの雰囲気にしたり，網点の印刷物のような演出ができます．
 
-TODO: image.
+![ディザ減色σの適用例](https://github.com/user-attachments/assets/4ba34576-14e0-45a8-a468-28d75d38a4f7)
 
 [:arrow_right: ディザリングのパターンの設定項目はこちら．](#ディザリングのパターンに関する設定項目)
 
@@ -129,7 +132,7 @@ TODO: image.
 
 選んだディザリングのパターンを透明度に適用して，透明度が階段状に変化するようにします．
 
-TODO: image.
+![透明度ディザσの適用例](https://github.com/user-attachments/assets/ec3c8903-5c0a-4384-8fbb-89a3028baa12)
 
 [:arrow_right: ディザリングのパターンの設定項目はこちら．](#ディザリングのパターンに関する設定項目)
 
@@ -147,7 +150,7 @@ TODO: image.
 
 グラデーションには複数色指定でき，トライトーンやテトラトーンなどの表現が可能です．それに加えてディザリングも適用した表現も可能です．
 
-TODO: image.
+![ディザポリトーンσの適用例](https://github.com/user-attachments/assets/58a6e431-fe6d-49b3-9c62-242ce8168a15)
 
 [:arrow_right: ディザリングのパターンの設定項目はこちら．](#ディザリングのパターンに関する設定項目)
 
@@ -180,7 +183,7 @@ TODO: image.
 
 選んだディザリングのパターンで画像を切り抜きます．
 
-TODO: image.
+![ディザマスクσの適用例](https://github.com/user-attachments/assets/399492f6-9564-4a8f-a6c1-bc3cf31a89aa)
 
 [:arrow_right: ディザリングのパターンの設定項目はこちら．](#ディザリングのパターンに関する設定項目)
 
@@ -196,7 +199,7 @@ TODO: image.
 
 斜めクリッピングのぼかし部分を選んだディザリングのパターンにします．標準の「斜めクリッピング」の拡張版としても使えます．
 
-TODO: image.
+![ディザ斜めクリッピングσの適用例](https://github.com/user-attachments/assets/242c7484-ba94-4750-8346-55fa7395f16f)
 
 [:arrow_right: ディザリングのパターンの設定項目はこちら．](#ディザリングのパターンに関する設定項目)
 
@@ -244,7 +247,7 @@ TODO: image.
 
 | 補間方法 | `線形補間` | `エルミート補間` |
 |:---:|:---:|:---:|
-| 画像 | TODO: image | TODO: image |
+| 画像 | ![線形補間の図](https://github.com/user-attachments/assets/2c9c96f4-87df-45ff-86f9-ae08a78d8e50) | ![エルミート補間の図](https://github.com/user-attachments/assets/d6529e4f-d11c-4602-929b-4586d227b8ff) |
 | 説明 | 錯視効果で開始・終了点にラインが見える． | 標準の「斜めクリッピング」や<br>「グラデーション」がこの補間法． |
 
 初期値は `線形補間`.
@@ -272,7 +275,7 @@ TODO: image.
 
 選んだディザリングのパターンで境界ぼかしをします．標準の「境界ぼかし」の代わりに使うこともでき，複雑な境界に対しても不連続になりにくくなっています．
 
-TODO: images.
+![ディザ境界ぼかしσの適用例](https://github.com/user-attachments/assets/1935ba29-2e9b-493c-88ca-b3ea3985f352)
 
 [:arrow_right: ディザリングのパターンの設定項目はこちら．](#ディザリングのパターンに関する設定項目)
 
@@ -329,7 +332,7 @@ TODO: images.
 
 [「ディザ斜めクリッピングσ」](#ディザ斜めクリッピングσ)のシーンチェンジ版スクリプトです．
 
-TODO: image.
+![ディザ斜めワイプσのデモ](https://github.com/user-attachments/assets/0c1753cb-d177-470a-952a-f32251e9c22a)
 
 ### 進捗
 
@@ -360,7 +363,7 @@ TODO: image.
 
 シーンチェンジ素材でのシーンチェンジに，選んだディザリングのパターンを適用する，シーンチェンジスクリプトです．
 
-TODO: image.
+![ディザシーンチェンジσのデモ](https://github.com/user-attachments/assets/018dc807-a6df-4b5b-af7b-20faadd001a9)
 
 ### 進捗 / 反転 / 諧調数 / 補間方法
 
