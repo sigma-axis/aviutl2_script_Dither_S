@@ -248,6 +248,7 @@ However, usage documentation for this script in languages other than Japanese is
 | 補間方法 | `線形補間` | `エルミート補間` |
 |:---:|:---:|:---:|
 | 画像 | ![線形補間の図](https://github.com/user-attachments/assets/2c9c96f4-87df-45ff-86f9-ae08a78d8e50) | ![エルミート補間の図](https://github.com/user-attachments/assets/d6529e4f-d11c-4602-929b-4586d227b8ff) |
+| 計算式 | $f(t) = t$ | $f(t) = t^2(3 - 2t)$ |
 | 説明 | 錯視効果で開始・終了点にラインが見える． | 標準の「斜めクリッピング」や<br>「グラデーション」がこの補間法． |
 
 初期値は `線形補間`.
